@@ -1,28 +1,51 @@
 # code here!
+require 'pry'
 class School
-
-    def initialize(name)
+    #@@all = []
+    attr_accessor :name, :roster
+    #.new will invoke initialize/ class method
+    def initialize(name) #, roster= {}) #or [] works
         @name = name
-        #A school should have a roster. The roster should be an empty hash upon initialization but will be built out to contain keys of grade levels. The value of each key will be an array of student names.
-        roster = {} 
-    end
-    def name=(name)
-        @name = name
-    end
-
-    def name
-        @name
-    end 
-    
-    def add_student(student_name, student_grade)
-        @student_name = student_name
-        @student_grade = student_grade
+        @roster = {}  
+        #self.name = name
+        #self.roster = roster
+        #@@all << self
     end
 
-
-
-        #roster << add_student
+    def add_student(name, grade)
+            #hash with a key that points to a value of an array
+            #array should contain a series of items
+            #create the key/value pair we want and add an item to the value array, all at the same time
+        if @roster.has_key?(grade)
+           @roster[grade] << name
+        else 
+           @roster[grade] = [name]
+        end    
     end
 
+    def grade(grade)
+        self.roster[grade]
+        # @roster[grade]
+    end
+
+    def sort
+        self.roster.each do |grade, students|
+            students.sort!
+        end
+    end
 
 end
+
+
+    #def add_student(student_name, student_grade)
+       #@student_name = student_name
+        #@student_grade = student_grade
+    #end
+
+        #roster << add_student
+
+       #def self.all #class method / has the word self 
+        #@@all
+       #end  
+#binding.pry
+#end
